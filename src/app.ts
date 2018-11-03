@@ -1,6 +1,6 @@
-import express from 'express';
-import bodyParser from 'body-parser'
-import socket from 'socket.io';
+import express = require("express");
+import bodyParser = require('body-parser')
+import socket = require('socket.io');
 import { createServer } from 'http';
 import * as requestController from "./controller/request_controller";
 
@@ -17,11 +17,10 @@ app.get('/:key', requestController.getRequest);
 app.post("/", (req, res) => {
     io.sockets.emit("update", req.body);
 })
-var server = httpServer.listen(3000, function(){
-    console.log('Listening on port 3000');
-});
+
 
 io.on("connection", function(socket) {
     console.log("Connected to Socket client.")
 });
-
+export default httpServer;
+// module.exports = app;

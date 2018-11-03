@@ -1,9 +1,14 @@
 import { Request, Response } from "express";
 import { readFile, writeFile } from "jsonfile";
 import { existsSync } from "fs";
-import { Namespace, Server }from 'socket.io';
 import { NextFunction } from "connect";
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 export let postRequest = (req: Request, res: Response, next: NextFunction) => {
     
     const file = 'data.json';
