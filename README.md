@@ -23,8 +23,7 @@ https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddom
 #Usage
 
     - To start the server, type "npm start".
-    - Install postman - https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en
-    - Select POST and type "http://localhost:3000" in the URL input field and click on body tab to enter the key and data values in the format {
+    - Select POST in Postman and type "http://localhost:3000" in the URL input field and click on body tab to enter the key and data values in the format {
         "key" : "keyValue"
         "data" : "dataValue"
     } and click on SEND.
