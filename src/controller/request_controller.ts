@@ -27,7 +27,7 @@ export let postRequest = (req: Request, res: Response, next: NextFunction) => {
             });
         });
     }  else {
-        //if file does not exist, return error 
+        //if file does not exist, create file 
         writeFile(file, requestObj, function (err) {
             res.send(requestObj);
             next();
