@@ -3,12 +3,7 @@ import { readFile, writeFile } from "jsonfile";
 import { existsSync } from "fs";
 import { NextFunction } from "connect";
 
-/**
- * 
- * @param req 
- * @param res 
- * @param next 
- */
+//POST given JSON data 
 export let postRequest = (req: Request, res: Response, next: NextFunction) => {
     
     const file = 'data.json';
@@ -17,11 +12,14 @@ export let postRequest = (req: Request, res: Response, next: NextFunction) => {
     var requestObj = {
         [userKey] : value
     };
+    //check if the file exists
     if (existsSync(file)) {
+        //read file
         readFile(file, function (err, obj) {
             if (err) console.error(err);
+            //assign new data to an obj
             requestObj = Object.assign(requestObj, obj); 
-            
+            //update the text file with the new content
             writeFile(file, requestObj, function (err) {
                 res.send(requestObj);
                 next();
@@ -29,6 +27,7 @@ export let postRequest = (req: Request, res: Response, next: NextFunction) => {
             });
         });
     }  else {
+        //if file does not exist, return error 
         writeFile(file, requestObj, function (err) {
             res.send(requestObj);
             next();
@@ -37,24 +36,28 @@ export let postRequest = (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
+//GET single data for a given key
 export let getRequest = (req: Request, res: Response) => {
     const file = 'data.json';
 
+    //check if file exists
     if (existsSync(file)) {
+        //read file
         readFile(file, function (err, obj) {
             if (err) console.error(err);
             var val = obj[req.params.key];
+            //check if key undefined
             if(val == undefined) {
                 res.status(404).json({
                     error: "Key not found"
                 });
-            } else {
+            } else { //give the required data value
                 res.status(200).json({
                     [req.params.key] : val
                 });
             }
         });
-    } else {
+    } else { //if file does not exist, return error
         res.status(404).json({
             error: "Key not found"
         });
